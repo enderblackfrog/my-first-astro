@@ -1,6 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BannerSvg from "../components/BannerSvg.astro";
+
+const identity = {
+  firstName: "莎拉",
+  country: "加拿大",
+  occupation: "技术撰稿人",
+  hobbies: ["摄影", "观鸟", "棒球"],
+};
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+const hobbiesColor = "#e463eb";
+const hobbiesSize = "1.5rem";
 ---
 
 <Layout title="关于">
@@ -9,16 +19,34 @@ import BannerSvg from "../components/BannerSvg.astro";
     <h1>
       <span class="text-gradient">About</span>
     </h1>
-    <p class="instructions">
-      页面路径是
-      <code>src/pages/about.astro</code>
-      <br />
-      <strong>strong标签:</strong>作为标题加粗
-    </p>
+    <div class="instructions">
+      <p>以下是关于我(NOT ME)的几个事实：</p>
+      <ul>
+        <li>我的名字是{identity.firstName}.</li>
+        <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
+        {
+          identity.hobbies.length >= 2 && (
+            <li class="hobbies">
+              我的两个习惯：{identity.hobbies[0]}和{identity.hobbies[1]}
+            </li>
+          )
+        }
+      </ul>
+      <p>我的技能是：</p>
+      <ul>
+        {
+          skills.map((skill) => (
+            <li>
+              <code>{skill}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </main>
 </Layout>
 
-<style>
+<style define:vars={{ hobbiesColor, hobbiesSize }}>
   main {
     margin: auto;
     padding: 1rem;
@@ -63,10 +91,17 @@ import BannerSvg from "../components/BannerSvg.astro";
   .instructions strong {
     color: rgb(var(--accent-light));
   }
+  .instructions ul {
+    list-style: none;
+  }
   .link-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
     gap: 2rem;
     padding: 0;
+  }
+  .hobbies {
+    color: var(--hobbiesColor);
+    font-size: var(--hobbiesSize);
   }
 </style>

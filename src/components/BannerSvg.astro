@@ -4,8 +4,9 @@ interface Props {
 }
 const { show } = Astro.props;
 ---
-
-<svg
+{
+    show && (
+        <svg
   class="astro-a"
   width="495"
   height="623"
@@ -33,6 +34,9 @@ const { show } = Astro.props;
     </linearGradient>
   </defs>
 </svg>
+    )
+}
+
 <style>
   .astro-a {
     position: absolute;
